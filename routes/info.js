@@ -1,21 +1,7 @@
 const router = require('koa-router')({})
 const db = require('../models'); //models
-const jwt = require('jsonwebtoken');
-
-const secret = 'hzy0913secret'; //加密的时候混淆
-
 
 router.prefix('/api');
-
-router.get('/auth', async ctx => {
-  if (false) {
-    res.json({auth});
-    return;
-  }
-  console.log(ctx)
-  console.log(11111)
-  ctx.body = {statu: 0};
-});
 
 router.get('/getuser', async (ctx, next) => {
   const output = {

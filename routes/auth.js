@@ -5,14 +5,9 @@ const {secret} = require('../config')
 
 router.prefix('/auth');
 
-router.get('/auth', async ctx => {
-  if (false) {
-    res.json({auth});
-    return;
-  }
-  console.log(ctx)
-  console.log(11111)
-  ctx.body = {statu: 0};
+router.get('/logined', async ctx => {
+  const {id} = ctx.state;
+  ctx.body = {statu: id ? 200 : 401};
 });
 
 router.post('/login', async ctx => {
@@ -38,7 +33,7 @@ router.post('/login', async ctx => {
     } else {
       //jwt生成token
       const token = jwt.sign({
-        name: 'hzy'
+        id: docs._id
       }, secret, {
         expiresIn:  3600//秒到期时间
       });
