@@ -41,14 +41,20 @@ app.use( async (ctx, next) => {
   });
   console.log(isVerify);
   if (isVerify) {
-    const jwtVerify = await jwt.verify(tid, secret);
+    let jwtVerify = {};
+    try {
+      console.log(tid);
+      console.log(secret);
+      jwtVerify = await jwt.verify(tid, secret);
+      console.log(jwtVerify);
+    } catch (err) {
+      ctx.throw(401, 'JsonWebTokenError', {name: 'JsonWebTokenError'});
+    }
     const {id = ''} = jwtVerify;
     if (id) {
       ctx.state = {id}
-      await next();
-    } else {
-      throw {status: 401, name: 'JsonWebTokenError', message: '验证失败！'};
     }
+    await next();
   } else {
     await next();
   }

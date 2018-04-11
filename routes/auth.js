@@ -60,6 +60,8 @@ router.post('/register', async ctx => {
     const save = await new db.LiveUser(userobj).save();
     console.log(save);
     ctx.body = {err: 200, message: '注册成功'};
+  } else {
+    ctx.throw(300, {message: '该账号已被注册！'});
   }
 });
 

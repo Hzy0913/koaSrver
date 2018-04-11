@@ -8,8 +8,10 @@ router.get('/getuser', async (ctx, next) => {
     name: 1,
     user: 1,
   };
+  console.log(123123123123);
   const userList = await db.LiveUser.find({}, output);
-  ctx.response.body = {err: 200, userList};
+  console.log(userList);
+  ctx.body = {err: 200, userList};
 });
 
 router.post('/register', async ctx => {
